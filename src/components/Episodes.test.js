@@ -16,7 +16,8 @@ const data = {
 
 test ("Episodes loads Api", async ()=>{
     mockFetchShow.mockResolvedValueOnce(data);
-    const {getByText} = render(<Episodes episodes={data} />)
+    const {getByText, rerender} = render(<Episodes episodes={[]} />)
+    rerender(<Episodes episodes={data.data._embedded.episodes} />)
     await waitFor(()=> {
         expect(getByText(/Chapter One/i)).toBeInTheDOM;
     })
